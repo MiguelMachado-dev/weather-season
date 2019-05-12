@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 
 class App extends Component {
-  // very first function that is going to be called any time an instance
-  // of this call is created
-  constructor(props) {
-    super(props);
+  state = {
+    lat: null,
+    errorMessage: '',
+  };
 
-    this.state = {
-      lat: null,
-      errorMessage: '',
-    };
-
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude } = position.coords;
