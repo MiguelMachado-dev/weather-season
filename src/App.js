@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import SeasonDisplay from './SeasonDisplay';
+
+import Spinner from './Spinner';
+
 class App extends Component {
   state = {
     lat: null,
@@ -18,17 +22,21 @@ class App extends Component {
     );
   }
 
-  render() {
+  renderContent() {
     const { lat, errorMessage } = this.state;
     if (errorMessage && !lat) {
       return <div>Error: {errorMessage}</div>;
     }
 
     if (!errorMessage && lat) {
-      return <div>Latitude: {lat}</div>;
+      return <SeasonDisplay lat={lat} />;
     }
 
-    return <div>Loading!</div>;
+    return <Spinner message="Please, accept location request" />;
+  }
+
+  render() {
+    return <div className="border red">{this.renderContent()}</div>;
   }
 }
 export default App;
